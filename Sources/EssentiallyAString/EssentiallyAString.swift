@@ -23,17 +23,19 @@ public protocol EssentiallyAString:
 where
     RawValue == String,
     
-    StringLiteralType == String,
+    StringLiteralType == String.StringLiteralType,
+    StringInterpolation == String.StringInterpolation,
+    UnicodeScalarLiteralType == String.UnicodeScalarLiteralType,
+    ExtendedGraphemeClusterLiteralType == String.ExtendedGraphemeClusterLiteralType,
+    
     UTF8View == String.UTF8View,
     UTF16View == String.UTF16View,
     UnicodeScalarView == String.UnicodeScalarView,
     SubSequence == String.SubSequence,
-
+    
     Element == String.Element,
     Index == String.Index,
-    Indices == String.Indices,
-
-    StringInterpolation == String.StringInterpolation
+    Indices == String.Indices
 {
     init(rawValue: String)
 }
@@ -271,24 +273,6 @@ public extension EssentiallyAString {
     @inline(__always)
     static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
         lhs.rawValue < rhs.rawValue
-    }
-    
-    
-    @inline(__always)
-    static func <= (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
-        lhs.rawValue <= rhs.rawValue
-    }
-    
-    
-    @inline(__always)
-    static func >= (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
-        lhs.rawValue >= rhs.rawValue
-    }
-    
-    
-    @inline(__always)
-    static func > (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
-        lhs.rawValue > rhs.rawValue
     }
 }
 
